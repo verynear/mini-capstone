@@ -1,0 +1,16 @@
+<h1>TV Memorabilia Store</h1>
+
+<% @products.each_slice(3) do |product_row| %>
+	<div class="row">
+		<% product_row.each do |product| %>
+			<div class="col-md-4">
+				<div class="well thumbnail index-list">
+					<h1><%= link_to product.name, "/products/#{product.id}" %></h1>
+					<h3>Price: <%= number_to_currency(product.price) %></h3>
+					<img src=<%= product.image %>>
+					<h3>Description: <%= product.description %></h3>
+				</div>
+			</div>
+		<% end %>
+	</div>
+<% end %>
