@@ -2,7 +2,29 @@ class ProductsController < ApplicationController
 
 	def index
 		@products = Product.all
-	end
+		sort_attribute = params[:sort]
+		sort_order = params[:sort_order]
+		discount_level = params[:discount]
+		@random_product_id = Product.all.sample.id
+		search_term = params[:search_term]
+
+		if search_term
+			search_term = "%#{search_term}%"
+			@products = @products.where("name ILIKE ?", search_term)
+		end
+
+
+		if discount_level
+			@products = @products.where('price < ?', discount_level.to_i)
+		end
+
+		if sort_attribute && sort_order
+		    @products = @products.order(sort_attribute => sort_order)
+		  elsif sort_attribute
+		  	@products = @products.order(sort_attribute)
+		  end
+		end
+
 
 	def new
 
@@ -23,6 +45,7 @@ class ProductsController < ApplicationController
 
 	def show
 		@product = Product.find(params[:id])
+		@supplier = @product.supplier.name
 	end
 
 	def edit
@@ -49,6 +72,12 @@ class ProductsController < ApplicationController
 
 		flash[:warning] = "Product Listing Removed"
 		redirect_to '/products'
+	end
+
+	def random
+		random_product = Product.all.sample
+
+		redirect_to "/products/#{random_product.id}"
 	end
 
 end

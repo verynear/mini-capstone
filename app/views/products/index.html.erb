@@ -7,7 +7,7 @@
 				<div class="well thumbnail index-list">
 					<h1><%= link_to product.name, "/products/#{product.id}" %></h1>
 					<h3>Price: <%= number_to_currency(product.price) %></h3>
-					<img src=<%= product.image %>>
+					<img src=<%= product.top_image %>>
 					<h3>Description: <%= product.description %></h3>
 				</div>
 			</div>

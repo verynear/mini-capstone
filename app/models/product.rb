@@ -1,5 +1,8 @@
 class Product < ApplicationRecord
 
+	belongs_to :supplier
+	has_many :images
+
 	def sale_message
 		if price.to_f < 2
 			"Discount Item!"
@@ -9,7 +12,7 @@ class Product < ApplicationRecord
 	end
 
 	def discounted?
-		if price.to_f < 500
+		price.to_f < 500
 	end
 
 	def item_tax
@@ -18,5 +21,9 @@ class Product < ApplicationRecord
 
 	def item_total
 		price.to_f + item_tax
+	end
+
+	def top_image
+		images.first.url
 	end
 end

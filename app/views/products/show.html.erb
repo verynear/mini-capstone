@@ -3,8 +3,11 @@
 <h3>Price: <%= number_to_currency(@product.price) %></h3>
 <h4>Tax: <%= number_to_currency(@product.item_tax) %></h4>
 <h3>Total Price: <%= number_to_currency(@product.item_total) %></h3>
-<img src=<%= @product.image %>>
+<% @product.images.each do |image_object| %>
+<img src=<%= image_object.url %>>
+<% end %>
 <h3>Description: <%= @product.description %></h3>
+<p>Supplier: <%= @supplier %></p>
 
 <%= link_to 'Home', '/products' %>
 <br>
