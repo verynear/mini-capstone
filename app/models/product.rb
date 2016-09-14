@@ -24,6 +24,11 @@ class Product < ApplicationRecord
 	end
 
 	def top_image
-		images.first.url
+		first_image = images.first
+		if first_image
+			first_image.url
+		else
+			"http://4.bp.blogspot.com/-MkvEkpV8fVs/UdMPTBgUqfI/AAAAAAAAljU/PUQPYPx9J1g/s800/funny-lost-and-found-posters-016.jpg"
+		end
 	end
 end

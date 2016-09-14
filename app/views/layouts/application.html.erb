@@ -24,6 +24,9 @@
           <% end %>
 
           <li class="active">
+            <%= link_to 'Home', "/" %>
+          </li>
+          <li class="active">
             <%= link_to 'Add Product', "/products/new" %>
           </li>
           <li class="dropdown">
@@ -34,7 +37,9 @@
               <li><a href="/products?discount=500">Items under $500</a></li>
               <li><a href="/products/random">Random Product</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
+              <li><a href="/signup">Sign Up</a></li>
+              <li><a href="/login">Log In</a></li>
+              <li><%= link_to 'Log Out', '/logout', method: :delete %></li>
             </ul>
           </li>
         </ul>

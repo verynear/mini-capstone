@@ -31,15 +31,16 @@ class ProductsController < ApplicationController
 	end
 
 	def create
-		@product = Product.create(name: params[:name], 
-								price: params[:price],
-								image: params[:image],
-								description: params[:description])
-		# @product.name = params[:name]
-		# @product.price = params[:price]
+		@product = Product.create(
+		name: params[:name],
+		description: params[:description],
+		price: params[:price],
+		supplier_id: params[:supplier][:supplier_id])
 
-		# @product.save
-		flash[:success] = "New Product Listing Created"
+		Image.create(url: params[:image], product_id: @product_id) if params[:image]
+		Image.create(url: params[:image_2], product_id: @product_id) if params[:image_2]
+
+		flash[:success] = "Product Listing Created"
 		redirect_to "/products/#{@product.id}"
 	end
 
@@ -54,14 +55,15 @@ class ProductsController < ApplicationController
 
 	def update
 		@product = Product.find(params[:id])
-		@product.update(name: params[:name], 
+		@product.update(
+						name: params[:name], 
 						price: params[:price], 
-						image: params[:image], 
-						description: params[:description])
-		# @product.name = params[:name]
-		# @product.price = params[:price]
-		# @product.image = params[:image]
-		# render 'show.html.erb'
+						description: params[:description]
+						)
+		
+		Image.update(url: params[:image], product_id: @product.id) if params[:image]
+    	Image.update(url: params[:image_2], product_id: @product.id) if params[:image_2]
+
 		flash[:success] = "Product Listing Updated"
 		redirect_to "/products/#{@product.id}"
 	end

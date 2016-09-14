@@ -11,11 +11,19 @@
 	</div>
 	<div>
 	  <%= label_tag :image %>
-	  <%= text_field_tag :image, @product.image %>
+	  <%= text_field_tag :images %>
+	</div>
+	<div>
+	  <%= label_tag :image_2 %>
+	  <%= text_field_tag :image_2 %>
 	</div>
 	<div>
 	  <%= label_tag :description %>
 	  <%= text_field_tag :description, @product.description %>
+	</div>
+	<div>
+	<%= label_tag :supplier_id %>
+	<%= collection_select :supplier, :supplier_id, Supplier.all, :id, :name %>
 	</div>
 	<br>
 	<div>
