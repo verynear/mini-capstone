@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
 
+	before_action :authenticate_user!, only: [:new, :edit]
+
 	def index
 		@products = Product.all
 		sort_attribute = params[:sort]
@@ -20,10 +22,11 @@ class ProductsController < ApplicationController
 
 		if sort_attribute && sort_order
 		    @products = @products.order(sort_attribute => sort_order)
-		  elsif sort_attribute
+		elsif sort_attribute
 		  	@products = @products.order(sort_attribute)
-		  end
 		end
+		
+	end
 
 
 	def new
