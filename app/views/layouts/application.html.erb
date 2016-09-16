@@ -29,10 +29,14 @@
           <% end %>
 
           <li class="active">
-            <%= link_to 'Home', "/" %>
+            <% if current_user %>
+              <%= link_to 'Home', "/" %>
+            <% end %>
           </li>
           <li class="active">
-            <%= link_to 'Add Product', "/products/new" %>
+            <% if current_user %>
+              <%= link_to 'Add Product', "/products/new" %>
+            <% end %>
           </li>
           
           <li class="dropdown">
