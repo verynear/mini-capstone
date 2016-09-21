@@ -10,7 +10,7 @@
 <p>Supplier: <%= @supplier %></p>
 
 <% if current_user %>
-	<%= form_tag '/orders', method: :post do %>
+	<%= form_tag '/carted_products', method: :post do %>
 	<div>
 		<%= label_tag :quantity %>
 		<%= text_field_tag :quantity%>
@@ -18,13 +18,14 @@
 	<div>
 		<%= hidden_field_tag :product_id, @product.id %>
 	</div>
-	<%= submit_tag "Buy Now" %>
+	<%= submit_tag "Add To Cart", class: "btn btn-success" %>
 	<% end %>
-
-	<%= link_to 'Edit', "/products/#{@product.id}/edit" %>
 	<br>
-	<%= link_to 'Delete', "/products/#{@product.id}", method: :delete %>
+	<% if current_user.admin %>
+		<%= link_to 'Edit', "/products/#{@product.id}/edit", class: "btn btn-info" %>
+		<%= link_to 'Delete', "/products/#{@product.id}", method: :delete, class: "btn btn-danger" %>
+	<% end %>
 <% else %>
 	<h3>New Customer? Register to place your order: <%= link_to 'Register', "/signup" %></h3>
-	<h3>Existing Customer - Login <%= link_to 'Login', "/login" %></h3>
+	<h3>Existing Customer - <%= link_to 'Login', "/login" %></h3>
 <% end %>

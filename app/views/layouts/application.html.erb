@@ -28,17 +28,15 @@
               <%= submit_tag 'Submit', class: "btn btn-default" %>
           <% end %>
 
+
           <li class="active">
-            <% if current_user %>
               <%= link_to 'Home', "/" %>
-            <% end %>
           </li>
           <li class="active">
-            <% if current_user %>
+            <% if current_user && current_user.admin %>
               <%= link_to 'Add Product', "/products/new" %>
             <% end %>
           </li>
-          
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -48,7 +46,12 @@
               <li><a href="/products/random">Random Product</a></li>
               <li role="separator" class="divider"></li>
               <% if current_user %>
-                <li><%= link_to 'Log Out', '/logout', method: :delete %></li>
+                <li>
+                  <%= link_to "<span class='glyphicon glyphicon-shopping-cart'></span> Cart(#{@cart_count})".html_safe, "/carted_products" %>
+                </li>
+                <li role="separator" class="divider"></li>
+                  <li><%= link_to 'Log Out', '/logout', method: :delete %>
+                </li>
               <% else %>
                 <li><a href="/signup">Sign Up</a></li>
                 <li><a href="/login">Log In</a></li>

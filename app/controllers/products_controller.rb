@@ -1,14 +1,15 @@
 class ProductsController < ApplicationController
 
-	before_action :authenticate_user!, only: [:new, :edit]
+	before_action :authenticate_admin!, except: [:index, :show]
 
 	def index
-		@products = Product.all
+		@products = Product.all.includes(:images)
 		sort_attribute = params[:sort]
 		sort_order = params[:sort_order]
 		discount_level = params[:discount]
 		@random_product_id = Product.all.sample.id
 		search_term = params[:search_term]
+
 
 		if search_term
 			search_term = "%#{search_term}%"
@@ -30,7 +31,7 @@ class ProductsController < ApplicationController
 
 
 	def new
-
+		
 	end
 
 	def create
