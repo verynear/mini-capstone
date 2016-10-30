@@ -26,6 +26,6 @@
 		<%= link_to 'Delete', "/products/#{@product.id}", method: :delete, class: "btn btn-danger" %>
 	<% end %>
 <% else %>
-	<h3>New Customer? Register to place your order: <%= link_to 'Register', "/signup" %></h3>
-	<h3>Existing Customer - <%= link_to 'Login', "/login" %></h3>
+	<h3>New Customer? Register to place your order: <%= link_to 'Register', "/signup", class: "btn btn-info btn-lg" %></h3>
+	<h3>Existing Customer - <%= link_to 'Login', "/login", class: "btn btn-success btn-lg" %></h3>
 <% end %>
